@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- 
+    This is the main Handlebars template for the site 
+    - When the user visits the homepage or submits a choice the app calls the endpoints in server.js
+    - The server script passes data in here and the Handlebars code builds it into the HTML page
+  -->
+
+<meta charset="UTF-8">
+<title>Vocab Bank (Prototype)</title>
+	<link rel="stylesheet" href="vocabBankSignupStyle.css">
+</head>
+
+<body>
+<div class="title"><b>VOCAB BANK</b></div>
+<div id="AccountSec" class="secContent">
+		<form action="/vocab_Signup" method="post" name="accessAccForm">	
+  		<h3>Sign Up Account</h3>
+  		<div class="accSecMDiv">
+	  		<div class="accSecDiv">
+	  		<label for="username"><b>Username</b></label>
+	  		<input type="text" placeholder="Enter your username" name="username" required>
+	  		</div>
+  		<div class="accSecDiv">		
+  		<label for="password1"><b>Password</b></label>
+  		<input type="password" placeholder="Enter your password" name="password1" required>
+  		</div>	
+  		<div class="accSecDiv">
+  		<label for="password2"><b>Re-type Password</b></label>
+  		<input type="password" placeholder="Re-type your password" name="password2" required>
+  		</div>
+  		<div class="accSecDiv">	
+  		<label>
+      		<input type="checkbox" checked="checked" name="remember" style="margin-bottom: 3px">  Remember me
+      	</label>
+   		
+   		<p style="padding-left: 15px;">By creating an account you agree to our <a href="#" style="color: dodgerblue">Terms and Privacy</a>.</p>
+  		</div>
+  		
+  		
+  		<div class="clearfix" style="padding-left: 12px;">
+     	 	<button type="submit" class="signupbtn">Sign Up</button>
+     	 	<button type="reset" class="cancelbtn">Cancel</button>
+     	 	<p style="padding-left: 5px;">Already have an account? <a href="vocabBankLogin.hbs" style="color: dodgerblue">Log in</a> instead.</p>
+    	</div>
+		<div class="gifDiv"></div>
+    	</div>
+  		</form>
+	</div>
+</body>
+</html>

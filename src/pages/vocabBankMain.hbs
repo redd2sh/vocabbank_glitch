@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<meta http-equiv="X-UA-compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vocab Bank (Prototype)</title>
+	<link rel="stylesheet" href="vocabBankMainStyle.css">
+	<script src="/vocab_SectionTab.js"></script>
+</head>
+<body onload="document.getElementById('defaultOpen').click();">
+	<div class="title"><b>VOCAB BANK</b></div>
+	
+	<div class="section">
+		<button class="seclinks" onclick="openSection(event, 'AddSec')" id="defaultOpen">VOCAB ADD</button>
+		<button class="seclinks" onclick="openSection(event, 'ListSec')">VOCAB LIST</button>
+		<button class="seclinks" onclick="openSection(event, 'PickSec')">VOCAB PICK</button>
+		<button class="seclinks" onclick="openSection(event, 'FileSec')">VOCAB FILE</button>
+		
+	</div>
+
+	<div id="AddSec" class="secContent">
+		<h3>Add New Vocab</h3>
+		<div class="secContainer" style=" color: black">
+			<form action="vocab_AddItems.js" method="post" name="addTerm">
+				<div class="addTermSec">
+					<label for="vocabTerm">Vocab Term</label>
+					<input type="text" placeholder="Enter vocab term here" id="vocabTerm" class="inputV" required>
+				</div>
+				<div class="addTermSec">
+					<label for="definition">Definition</label>
+					<textarea placeholder="Define..." name="definition" class="inputV" style="height: 100px" required></textarea>
+					
+				</div>
+				<div class="addTermSec">
+					<label for="context">Use/Context</label>
+					<textarea placeholder="Write something..." name="context" class="inputV" style="height: 100px" required></textarea>
+				</div>
+				<div class="addTermSec">
+					<label for="notes">Notes</label>
+					<textarea placeholder="Note here..."  name="notes" class="inputV" style="height: 80px"></textarea>
+				</div>
+				<div class="addTermSec">
+					<label for="date">Input Date</label>
+      				<input type="date" name="date" class="inputV">
+      			
+				<div class="clearfix">
+     	 			<button type="submit" class="addbtn">Add Vocab</button>
+     	 			<button type="reset" class="cancelbtn">Cancel</button>
+      				</div>
+      			
+    			</div>
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<div id="ListSec" class="secContent">
+		<h3>Vocab List</h3>
+		<div class="secContainer" id="vocabList" style="overflow-x:auto; overflow-y:auto;">
+		
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	<div id="PickSec" class="secContent">
+		<h3>Vocab Pick</h3>
+		<div class="secContainer" style="color: black;">
+			<script src="vocab_Pick.js" async></script>
+		</div>
+	</div>
+	
+	
+	
+	
+	<div id="FileSec" class="secContent">
+		<h3>Vocab File</h3>
+		<div class="secContainer">
+    <p>
+      space
+      </p>
+
+		<form method="post" action="/vocab_Logout.js">
+      <div class="clearfix">
+        <button type="submit" class="logoutbtn">Logout</button>
+      </div>
+		</form>
+		</div>
+	</div>
+	
+	
+</body>
+</html>
