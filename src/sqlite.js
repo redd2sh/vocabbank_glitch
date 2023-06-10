@@ -74,32 +74,99 @@ module.exports = {
    * Find and update the chosen option
    * Return the updated list of votes
    */
-  processAcc: async ([username, password]) => {
+  signupAcc: async (username, password) => {
     // Insert new Log table entry indicating the user choice and timestamp
     try {
       // Check the vote is valid
-      let un = await db.all(
+      const un = await db.get(
         "SELECT COUNT(*) from Vocab_acctbl WHERE username = ?",
         [username]
       );
+      const {'COUNT(*)': count} = un;
       const un1 = await db.all(
-        "SELECT * from Vocab_acctbl WHERE username = ?",
-        [username]
-      );
-      console.log(un)
+        "SELECT * from Vocab_acctbl");
+      console.log(count)
       console.log(un1)
-      if (un.length === 0) {
+      if (count == 0) {
         // Build the user data from the front-end and the current time into the sql query
-        await db.run("INSERT INTO Vocab_acctbl (username, password) VALUES (?, ?)", (
-          [username,
+        await db.run("INSERT INTO Vocab_acctbl (username, password) VALUES (?, ?)", ([username,
          password
         ]));
-      }
+      } else
+        {
+          throw "Duplicate existing account. Retry login or use other username."
+        }
+      const un2 = await db.all(
+        "SELECT * from Vocab_acctbl");
+      console.log(count)
       console.log(un1)
+      console.log(un2)
       console.log("that is all");
     
     } catch (dbError) {
       console.error(dbError);
     }
+  },
+  
+  
+  
+  
+addTerm: async (vTerm, defi, contx, note, date, usern) => {
+    // Insert new Log table entry indicating the user choice and timestamp
+    try {
+      // Check the vote is valid
+      const countRes = await db.get(
+        "SELECT COUNT(*) from Vocab_tbl WHERE username = ? and vocab_term = ?",
+        ([usern, vTerm])
+      );
+      const {'COUNT(*)': count} = countRes;
+
+      console.log(count)
+      console.log(countRes)
+      if (count == 0) {
+        // Build the user data from the front-end and the current time into the sql query
+        await db.run("INSERT INTO Vocab_tbl (vocab_term, definition, context, notes, date, username) VALUES (?, ?, ?, ?, ?, ?)", ([vTerm, defi, contx, note, date, usern]));
+      } else
+        {
+            throw "Invalid inputs or a duplicate vocab term input. Please try again."
+        }
+      const un2 = await db.all(
+        "SELECT * from Vocab_tbl where username = ? and vocab_term = ?",
+        ([usern, vTerm])
+      );
+      console.log(countes)
+
+      console.log("that is all");
+    
+    } catch (dbError) {
+      console.error(dbError);
+    }
+  },
+  
+  
+  
+  
+  
+loginAcc: async (username, password) => {
+    // Insert new Log table entry indicating the user choice and timestamp
+    try {
+      // Check the vote is valid
+      const result = await db.get(
+        "SELECT COUNT(*) from Vocab_acctbl WHERE username = ? AND password = ?",
+        [username, password]
+      );
+      const {'COUNT(*)': count} = result;
+      
+      console.log(count)
+      console.log(result)
+      if (count != 1) {
+        throw "Duplicate or account not exist. Retry login or use other username."
+        
+      }
+    } catch (dbError) {
+      console.error(dbError);
+    }
   }
+  
+  
 }

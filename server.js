@@ -67,14 +67,13 @@ let username;
 
 fastify.post("/vocab_Signup", async (request, reply) => {
  // params.optionHistory = await db.getLogs();
-  let vbUsername = request.body.username
-  let vbPassword1 = request.body.password1
-  let vbPassword2 = request.body.password2
+  const vbUsername = await request.body.username
+  const vbPassword1 = await request.body.password1
+  const vbPassword2 = await request.body.password2
   
   username = vbUsername
   
-  let vbAcc = await db.processAcc(vbUsername, vbPassword1)
-  console.log(vbAcc)
+  const vbAcc = await db.signupAcc(vbUsername, vbPassword1)
   
   // insert module processAcc
   
@@ -89,7 +88,68 @@ return vbPassword1 === vbPassword2 ?
 });
 
 // create route for login
+fastify.get("/vocabBankLogin", async (request, reply) => {
+  /* 
+  Params is the data we pass to the client
+  - SEO values for front-end UI but not for raw data
+  */
+  let params = request.query.raw ? {} : { seo: seo };
+  
+ 
+  // Send the page options or raw JSON data if the client requested it
+  return request.query.raw
+    ? reply.send(params)
+    : reply.view("/src/pages/vocabBankLogin.hbs", params);
+});
 
+// const json = require("./dataForm.json");
+// const vocabSignup = require("./vocabBankSignup.hbs");
+
+// var???? to store in js?
+
+
+
+fastify.post("/vocab_Login", async (request, reply) => {
+ // params.optionHistory = await db.getLogs();
+  const vbUsername = await request.body.username
+  const vbPassword = await request.body.password
+
+  username = vbUsername
+  
+  const vbAcc = await db.loginAcc(vbUsername, vbPassword)
+  
+  // insert module processAcc
+  
+return reply.view("/src/pages/vocabBankMain.hbs")
+
+  // insert alert here
+
+  // map for login
+    
+  
+});
+
+fastify.post("/vocab_Add", async (request, reply) => {
+ // params.optionHistory = await db.getLogs();
+  const vbVocabTerm = await request.body.vocabTerm
+  const vbDefinition = await request.body.definition
+  const vbContext = await request.body.context
+  const vbNotes = await request.body.notes
+  const vbDate = await request.body.date
+  const vbUsername = await username
+  
+  const vbAcc = await db.loginAcc(vbVocabTerm, vbDefinition, vbContext, vbNotes, vbDate, vbUsername)
+  
+  // insert module processAcc
+  
+return reply.view("/src/pages/vocabBankMain.hbs")
+
+  // insert alert here
+
+  // map for login
+    
+  
+});
 
 
 
