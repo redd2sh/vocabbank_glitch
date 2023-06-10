@@ -62,24 +62,33 @@ fastify.get("/", async (request, reply) => {
 // const vocabSignup = require("./vocabBankSignup.hbs");
 
 // var???? to store in js?
+let username;
+
 
 fastify.post("/vocab_Signup", async (request, reply) => {
  // params.optionHistory = await db.getLogs();
   let vbUsername = request.body.username
   let vbPassword1 = request.body.password1
   let vbPassword2 = request.body.password2
-  return vbPassword1 === vbPassword2 ?
+  
+  username = vbUsername
+  
+  let vbAcc = await db.processAcc(vbUsername, vbPassword1)
+  console.log(vbAcc)
+  
+  // insert module processAcc
+  
+return vbPassword1 === vbPassword2 ?
  reply.view("/src/pages/vocabBankMain.hbs")
-  : reply.send("Username or password error!")
+  : reply.send("Username or password error!");
   // insert alert here
-  
-  
+
   // map for login
     
   
 });
 
-
+// create route for login
 
 
 
