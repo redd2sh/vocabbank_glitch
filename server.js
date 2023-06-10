@@ -62,7 +62,7 @@ fastify.get("/", async (request, reply) => {
 // const vocabSignup = require("./vocabBankSignup.hbs");
 
 // var???? to store in js?
-let username;
+var username;
 
 
 fastify.post("/vocab_Signup", async (request, reply) => {
@@ -102,54 +102,60 @@ fastify.get("/vocabBankLogin", async (request, reply) => {
     : reply.view("/src/pages/vocabBankLogin.hbs", params);
 });
 
-// const json = require("./dataForm.json");
-// const vocabSignup = require("./vocabBankSignup.hbs");
-
-// var???? to store in js?
 
 
+// form action Login
 
 fastify.post("/vocab_Login", async (request, reply) => {
- // params.optionHistory = await db.getLogs();
+
   const vbUsername = await request.body.username
   const vbPassword = await request.body.password
 
-  username = vbUsername
+  username = await vbUsername
   
   const vbAcc = await db.loginAcc(vbUsername, vbPassword)
-  
-  // insert module processAcc
+
   
 return reply.view("/src/pages/vocabBankMain.hbs")
 
-  // insert alert here
-
-  // map for login
-    
-  
 });
 
-fastify.post("/vocab_Add", async (request, reply) => {
- // params.optionHistory = await db.getLogs();
+fastify.post("/vocab_AddTerm", async (request, reply) => {
+
   const vbVocabTerm = await request.body.vocabTerm
   const vbDefinition = await request.body.definition
   const vbContext = await request.body.context
   const vbNotes = await request.body.notes
   const vbDate = await request.body.date
   const vbUsername = await username
+
   
-  const vbAcc = await db.loginAcc(vbVocabTerm, vbDefinition, vbContext, vbNotes, vbDate, vbUsername)
+  const vbData = await db.addTerm(vbVocabTerm, vbDefinition, vbContext, vbNotes, vbDate, vbUsername)
+
   
-  // insert module processAcc
+  
   
 return reply.view("/src/pages/vocabBankMain.hbs")
-
-  // insert alert here
-
-  // map for login
-    
-  
 });
+
+
+fastify.post("/vocab_ListTerm", async (request, reply) => {
+  
+  const params = await request.query.raw ? {} : { seo: seo };
+
+  // Get the log history from the db
+  params.userTable = await db.listTerm(username);
+
+  // Let the user know if there's an error
+  params.error = params.userTable ? null : data.errorMessage;
+
+  // Send the log list
+  return request.query.raw
+    ? reply.send(params)
+    : reply.view("/src/pages/vocabBankMain.hbs", params);
+});
+
+
 
 
 

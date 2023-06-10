@@ -177,6 +177,7 @@ body, html {
 	background-color: #f19d9c;
 	margin: 5px;
 	border: 3px solid white;
+	font-weight: bold;
 	color: white;
 }	
 
@@ -203,15 +204,6 @@ input[type=text], select, textarea{
   resize: vertical;
 }
 
-input[type=password] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid white;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
-}
-
 label {
   padding: 12px 12px 12px 0px;
   display: inline-block;
@@ -222,6 +214,7 @@ input[type=submit] {
   color: white;
   padding: 10px 20px;
 	border: 3px solid white;
+	font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
   float: right;

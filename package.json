@@ -13,7 +13,9 @@
     "sqlite3": "^5.1.6",
     "@fastify/view": "^7.4.1",
     "@fastify/static": "^6.10.2",
-    "@fastify/formbody": "^7.4.0"
+    "@fastify/formbody": "^7.4.0",
+    "ejs": "^3.1.9",
+    "node-json2html": "^2.2.3"
   },
   "engines": {
     "node": "14.x"

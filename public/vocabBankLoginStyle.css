@@ -18,7 +18,7 @@
 }
 .gifDiv {
 	height: 150px;
-	background-image: url("cloud2.gif");
+	background-image: url("https://cdn.glitch.global/c8578ba1-e8d0-46e6-98a9-418d4a5631d4/cloud2.gif?v=1686217849711");
 
 } 
 
@@ -137,10 +137,11 @@ body, html {
 
 
 .secContent {
+  display: block;
 	background-color: #5a70be;
 	width: 80%;
  	margin: 0 auto;
- 	align-self: center;
+
 	justify-content: center;
  	padding: 0px 20px 20px;
  	border: 1px solid white;
@@ -173,7 +174,7 @@ body, html {
 
 
 input[type=text], select, textarea {
-  width: 35%;
+  width: 50%;
   padding: 8px;
   border: 1px solid white;
   border-radius: 4px;
@@ -182,7 +183,7 @@ input[type=text], select, textarea {
 }
 
 input[type=password] {
-  width: 35%;
+  width: 50%;
   padding: 8px;
   border: 1px solid white;
   border-radius: 4px;
@@ -207,22 +208,19 @@ input[type=submit], input[type=reset] {
 
 
 
-
 .accSecMDiv {
+  display: block;
 	text-align: left;
+	flex-direction: column;
 	margin: 0 auto;
 
 	background-color: #b0b8d3;
-	padding: 10px 20px 20px;
 	border-radius: 10px;
-	width: 95%;
+	padding: 10px 20px 20px;
 	color: #262a40;
 	
 	
 }
-
-
-
 
 
 

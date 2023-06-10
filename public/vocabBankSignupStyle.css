@@ -154,6 +154,7 @@ body, html {
 	background-color: #f19d9c;
 	margin: 5px;
 	border: 3px solid white;
+	font-weight: bold;
 	color: white;
 }	
 
@@ -175,7 +176,7 @@ body, html {
 
 
 input[type=text], select, textarea {
-  width: 35%;
+  width: 50%;
   padding: 8px;
   border: 1px solid white;
   border-radius: 4px;
@@ -184,7 +185,7 @@ input[type=text], select, textarea {
 }
 
 input[type=password] {
-  width: 35%;
+  width: 50%;
   padding: 8px;
   border: 1px solid white;
   border-radius: 4px;
