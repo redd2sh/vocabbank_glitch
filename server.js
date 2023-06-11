@@ -265,6 +265,25 @@ fastify.get("/vocabBank_File", async (request, reply) => {
 fastify.post("/vocab_Logout", async (request, reply) => {
 
  username = "";
+   try {
+  // Get the data from the db
+    
+  const blank = "Overwritten as logged out.";
+  const fs = require('fs');
+    
+  fs.writeFile("./public/vocabBankF.txt", blank, (err) => {
+  if (err) {
+    console.log(err);
+
+  }
+  else {
+    console.log("File written as logged out successfully\n");
+  }
+});
+  } catch (error) {
+    console.error(error)
+    
+  }
   
 return reply.view("/src/pages/vocabBankSignup.hbs")
 

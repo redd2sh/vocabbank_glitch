@@ -12,7 +12,7 @@
 	<div class="title"><b>VOCAB BANK</b></div>
 	
 <div class="section">
-		<button class="seclinks" onclick="openSection(event, 'AddSec')"  id="defaultOpen">VOCAB ADD</button>
+		<button class="seclinks" onclick="openSection(event, 'AddSec')" id="defaultOpen">VOCAB ADD</button>
 		<button class="seclinks" onclick="openSection(event, 'ListSec')">VOCAB LIST</button>
 		<button class="seclinks" onclick="openSection(event, 'PickSec')">VOCAB PICK</button>
   <button class="seclinks" onclick="openSection(event, 'FileSec')">VOCAB FILE</button>
@@ -60,15 +60,15 @@
 	
 	<div id="ListSec" class="secContent">
 		<h3>Vocab List</h3>
-		<div class="secContainer" id="vocabList" style="overflow-x:auto; overflow-y:auto;">
+		<div class="secContainer" id="vocabList">
         <div class="listDiv">
       <a href= "/vocab_ListTerm" class="listbtn">Load List</a>
         </div>
       
     {{#if userTable.length}}
-      <div style="overflow-x:auto; overflow-y:auto; background-color: white;">
+      <div style="overflow-x:auto; background-color: white; width: 100%; height: 500px">
       <table border="1">
-    <thead style="color: black; text-align: center;">
+    <thead style="color: white; text-align: center; background-color: #262a40">
           <tr>
              <th>Vocab_Term</th>
              <th>Definition</th>
@@ -100,20 +100,20 @@
 	
 	<div id="PickSec" class="secContent">
 		<h3>Vocab Pick</h3>
-    <div class="secContainer" style="overflow-x:auto; overflow-y:auto; color: black;">
+    <div class="secContainer" style="overflow-x:auto; color: black;">
       <div class="listDiv">
       <a href= "/vocab_PickTerm" class="listbtn">Load Picks</a>
         </div>
       {{#if pickTerm1.length}}
           {{#each pickTerm1}}
-                <div id="pickTerm" class="pickDiv" style="height: 80px;">
-                  <h4>{{vocab_term}}</h4>
+                <div id="pickTerm" class="pickDiv">
+                  <h4>"{{vocab_term}}"</h4>
                   
                   </div> 
-                  <div id="pickDef" class="pickDiv" style="height: 125px;">
+                  <div id="pickDef" class="pickDiv">
                   <p>{{definition}}</p>
                   </div>
-                  <div id="pickCntxt" class="pickDiv" style="height: 125px;">
+                  <div id="pickCntxt" class="pickDiv">
                   <p>{{context}}</p>
                 </div>
             {{/each}}
@@ -123,8 +123,9 @@
           {{#each pickTerm2}}
                 <div id="moreTerm">
                   <h4>More Terms: </h4>
-					        <div id="termSetA" class="rowTerm" style="height: 40px;">
-                  <p>{{vocab_term}} - {{definition}}</p>
+                  </div>
+					        <div id="termSetA" class="rowTerm" >
+                  <p>"{{vocab_term}}" : {{definition}}</p>
                   </div>
                 
             {{/each}}
@@ -132,20 +133,20 @@
       
          {{#if pickTerm3.length}}
           {{#each pickTerm3}}
-					        <div id="termSetB" class="rowTerm" style="height: 40px;">
-                  <p>{{vocab_term}} - {{definition}}</p>
+					        <div id="termSetB" class="rowTerm">
+                  <p>"{{vocab_term}}" : {{definition}}</p>
                   </div>
             {{/each}}
           {{/if}}
       
           {{#if pickTerm4.length}}
           {{#each pickTerm4}}
-					        <div id="termSetC" class="rowTerm" style="height: 40px;">
-                  <p>{{vocab_term}} - {{definition}}</p>
+					        <div id="termSetC" class="rowTerm">
+                  <p>"{{vocab_term}}" : {{definition}}</p>
                   </div>
             {{/each}}
           {{/if}}
-                  </div>
+                  
       {{/if}}
 	</div>
   </div>
