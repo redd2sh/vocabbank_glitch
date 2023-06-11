@@ -112,6 +112,7 @@ db_all,
       } else
         {
           throw "Duplicate existing account. Retry login or use other username."
+          return 1;
         }
       const un2 = await db.all(
         "SELECT * from Vocab_acctbl");
@@ -156,6 +157,7 @@ addTerm: async (vTerm, defi, contx, notes, date, usern) => {
       else
         {
             throw "Invalid inputs or a duplicate vocab term input. Please try again."
+            return 1;
         }
       const res2 = await db.all(
         "SELECT * from Vocab_tbl where username = ? AND vocab_term = ?",
@@ -185,7 +187,7 @@ loginAcc: async (username, password) => {
 
       if (!(count == 1)) {
         throw "Duplicate or account not exist. Retry login or use other username."
-        
+        return 1;
       }
       console.log("Logged in")
     } catch (dbError) {
@@ -209,7 +211,7 @@ loginAcc: async (username, password) => {
       
       
       
-      return await db.each(
+      return await db.all(
         "SELECT * from Vocab_tbl WHERE username = ?",
         [username]);
       
@@ -217,9 +219,44 @@ loginAcc: async (username, password) => {
       console.error(dbError);
     }
   
+  },
   
- 
   
+  
+  
+  
+  
+    countTerm: async username => {
+    // Insert new Log table entry indicating the user choice and timestamp
+    try {
+      // Check the vote is valid
+        const countRes = await db.get(
+        "SELECT COUNT(*) from Vocab_tbl WHERE username = ?",
+        ([username])
+      );
+      const {'COUNT(*)': count} = await countRes;
+
+      return await count
+      
+    } catch (dbError) {
+      console.error(dbError);
+    }
+},
+  
+  
+  
+  
+  pickTerm: async (username, rownum) => {
+    // Insert new Log table entry indicating the user choice and timestamp
+    try {
+      // Check the vote is valid
+        return await db.all(
+        "SELECT * from Vocab_tbl WHERE username = ? limit ?, 1",
+        ([username, rownum])
+      );
+    } catch (dbError) {
+      console.error(dbError);
+    }
   
   }
 }

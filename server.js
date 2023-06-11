@@ -115,8 +115,11 @@ fastify.post("/vocab_Login", async (request, reply) => {
   
   const vbAcc = await db.loginAcc(vbUsername, vbPassword)
 
+
   
-return reply.view("/src/pages/vocabBankMain.hbs")
+return await vbAcc == 1 ?
+  reply.view()
+  : reply.view("/src/pages/vocabBankMain.hbs")
 
 });
 
@@ -135,15 +138,17 @@ fastify.post("/vocab_AddTerm", async (request, reply) => {
   
   
   
-return reply.view("/src/pages/vocabBankMain.hbs")
+return await vbData == 1 ? 
+  reply.view("Invalid Inputs or Duplicate Entry!")
+  : reply.view("/src/pages/vocabBankMain.hbs")
 });
 
 
-fastify.post("/vocab_ListTerm", async (request, reply) => {
+fastify.get("/vocab_ListTerm", async (request, reply) => {
   
   const params = await request.query.raw ? {} : { seo: seo };
 
-  // Get the log history from the db
+  // Get the data from the db
   params.userTable = await db.listTerm(username);
 
   // Let the user know if there's an error
@@ -154,6 +159,53 @@ fastify.post("/vocab_ListTerm", async (request, reply) => {
     ? reply.send(params)
     : reply.view("/src/pages/vocabBankMain.hbs", params);
 });
+
+
+
+fastify.get("/vocab_PickTerm", async (request, reply) => {
+  
+  const params = await request.query.raw ? {} : { seo: seo };
+
+  // Get the data from the db
+  params.userTable = await db.listTerm(username);
+
+  // Let the user know if there's an error
+  params.error = params.userTable ? null : data.errorMessage;
+
+  // Send the log list
+  return request.query.raw
+    ? reply.send(params)
+    : reply.view("/src/pages/vocabBankMain.hbs", params);
+});
+
+
+
+
+
+
+
+fastify.get("/vocabBank_File", async (request, reply) => {
+  
+  const params = await request.query.raw ? {} : { seo: seo };
+
+  // Get the data from the db
+  
+   const obj = await db.listTerm(username);
+    var util = require('util');
+    fs.writeFileSync("/vocabBankF.json", util.inspect(obj) , 'utf-8');
+
+
+
+  // Send the log list
+  return request.query.raw
+    ? reply.send(params)
+    : reply.view("/src/pages/vocabBankMain.hbs", params);
+});
+
+
+
+
+
 
 
 

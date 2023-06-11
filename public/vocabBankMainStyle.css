@@ -171,7 +171,13 @@ body, html {
   margin: 40px 20px 20px;
 }
 
-.cancelbtn, .addbtn, .logoutbtn {
+.listbtn {
+  padding: 5px;
+}
+
+
+
+.cancelbtn, .addbtn, .logoutbtn, .listbtn {
 	height: 30px;
 	width: 90px;
 	background-color: #f19d9c;
@@ -181,14 +187,12 @@ body, html {
 	color: white;
 }	
 
+.listDiv {
+  margin-top: 20px;
+  margin-bottom: 15px;
 
 
-
-
-
-
-
-
+}
 
 
 

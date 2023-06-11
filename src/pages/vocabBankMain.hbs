@@ -4,19 +4,18 @@
 	<meta charset="ISO-8859-1">
 	<meta http-equiv="X-UA-compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Vocab Bank (Prototype)</title>
+	<title>Vocab Bank</title>
 	<link rel="stylesheet" href="vocabBankMainStyle.css">
-	<script src="/vocab_SectionTab.js"></script>
+  	<script src="/vocab_SectionTab.js"></script>
 </head>
 <body onload="document.getElementById('defaultOpen').click();">
 	<div class="title"><b>VOCAB BANK</b></div>
 	
-	<div class="section">
-		<button class="seclinks" onclick="openSection(event, 'AddSec')" id="defaultOpen">VOCAB ADD</button>
-		<button class="seclinks" onclick="openSection(event, 'ListSec')" href="/vocab_ListTerm">VOCAB LIST</button>
+<div class="section">
+		<button class="seclinks" onclick="openSection(event, 'AddSec')"  id="defaultOpen">VOCAB ADD</button>
+		<button class="seclinks" onclick="openSection(event, 'ListSec')">VOCAB LIST</button>
 		<button class="seclinks" onclick="openSection(event, 'PickSec')">VOCAB PICK</button>
-		<button class="seclinks" onclick="openSection(event, 'FileSec')">VOCAB FILE</button>
-		
+  <button class="seclinks" onclick="openSection(event, 'FileSec')">VOCAB FILE</button>
 	</div>
 
 	<div id="AddSec" class="secContent">
@@ -62,7 +61,12 @@
 	<div id="ListSec" class="secContent">
 		<h3>Vocab List</h3>
 		<div class="secContainer" id="vocabList" style="overflow-x:auto; overflow-y:auto;">
+        <div class="listDiv">
+      <a href= "/vocab_ListTerm" class="listbtn">Load List</a>
+        </div>
+      
     {{#if userTable.length}}
+      <div style="overflow-x:auto; overflow-y:auto; background-color: white;">
       <table border="1">
     <thead style="color: black; text-align: center;">
           <tr>
@@ -70,10 +74,10 @@
              <th>Definition</th>
              <th>Context</th>
              <th>Notes</th>
-             <th width="9%">Date</th>
+             <th>Date</th>
           </tr>
       </thead>
-      <tbody>
+      <tbody style="color: black; padding: 5px">
             {{#each userTable}}
                 <tr>
                   <td>{{vocab_term}}</td>
@@ -89,8 +93,9 @@
       <p class="error">
         No records!
       </p>
+      </div>
       {{/if}}
-		</div>
+    </div>
 	</div>
 	
 	
@@ -99,8 +104,38 @@
 	
 	<div id="PickSec" class="secContent">
 		<h3>Vocab Pick</h3>
-		<div class="secContainer" style="color: black;">
-			<script src="vocab_Pick.js" async></script>
+        {{#if userTable.length}}
+      <div style="overflow-x:auto; overflow-y:auto; background-color: white;">
+      <table border="1">
+    <thead style="color: black; text-align: center;">
+          <tr>
+             <th>Vocab_Term</th>
+             <th>Definition</th>
+             <th>Context</th>
+             <th>Notes</th>
+             <th>Date</th>
+          </tr>
+      </thead>
+      <tbody style="color: black; padding: 5px">
+            {{#each userTable}}
+                <tr>
+                  <td>{{vocab_term}}</td>
+                  <td>{{definition}}</td>
+                  <td>{{context}}</td>
+                  <td>{{notes}}</td>
+                  <td>{{date}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+      <p class="error">
+        No records!
+      </p>
+      </div>
+      {{/if}}
+    
+				</div>
 		</div>
 	</div>
 	
@@ -109,12 +144,14 @@
 	
 	<div id="FileSec" class="secContent">
 		<h3>Vocab File</h3>
+  
 		<div class="secContainer">
-    <p>
-      space
-      </p>
+      <p>Download your Vocab Bank as a .json file</p>
+      <div class="clearfix">
+        <a href="/vocabBank_File" class="dLbtn" download="/vocabBankF.json">Download</a>
+      </div>
 
-		<form method="post" action="/vocab_Logout.js">
+		<form method="post" action="/vocab_Logout">
       <div class="clearfix">
         <button type="submit" class="logoutbtn">Logout</button>
       </div>
@@ -122,6 +159,6 @@
 		</div>
 	</div>
 	
-	
+
 </body>
 </html>
