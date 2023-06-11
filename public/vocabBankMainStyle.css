@@ -176,9 +176,14 @@ body, html {
   padding: 5px;
 }
 
+.DLBtn {
+  padding: 5px;
+  margin: 0 auto;
+}
 
 
-.cancelbtn, .addbtn, .logoutbtn, .listbtn {
+
+.cancelbtn, .addbtn, .logoutbtn, .listbtn, .DLBtn {
 	height: 30px;
 	width: 90px;
 	background-color: #f19d9c;

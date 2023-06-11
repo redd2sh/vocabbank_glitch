@@ -153,31 +153,37 @@
 	
 	
 	
+  
+  
+  
 	<div id="FileSec" class="secContent">
 		<h3>Vocab File</h3>
   
 		<div class="secContainer">
        <div class="clearfix">
          <div style="margin: 5px">
-      <p>Download your Vocab Bank as a .txt file.</p>
-        <a href="/vocabBank_File" class="dLbtn">Load to ready the file</a>
+      <p style="color: #262a40">Download your Vocab Bank as a .txt file.</p>
+         </div>
+           <div style="margin: 5px 5px 10px; padding-bottom: 10px">
+        <a href="/vocabBank_File" class="LDBtn">Load to ready the file</a>
     </div>   
       {{#if msg.length}}
          <div style="margin: 5px">
-         <p>
+         <p style="background-color: #262a40; width: 240px; padding: 5px; border-radius: 5px; margin: 15px;">
            {{msg}}
          </p>
          </div>
          {{/if}}
-         <div style="margin: 5px">
-        <a href="/vocabBankF.txt" class="dLbtn" download="vocabBankF.txt">Download!</a>
+         <div style="margin: 10px">
+        <a href="/vocabBankF.txt" class="DLBtn" download="vocabBankF.txt">Download!</a>
            </div>
       </div>
 		<form method="post" action="/vocab_Logout">
-      <div class="clearfix">
+      <div class="clearfix" style="margin: 40px 5px 20px">
+      <p style="color: white; font-weight: bold">Logout your account here</p>
         <button type="submit" class="logoutbtn">Logout</button>
       </div>
-		</form>
+        </form>
       <div class="gifDiv">
         <img src="https://cdn.glitch.global/c8578ba1-e8d0-46e6-98a9-418d4a5631d4/catread.gif?v=1686476159315" alt="catread">
         </div>

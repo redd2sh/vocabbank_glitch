@@ -48,6 +48,9 @@ Search Engine Optimization, the process used to optimize a website's technical c
 ← `public/vocab_SectionTab.js`
 Script for the main page to setup the section tabs which elements to display or hide by the section tab clicks.
 
+← `vocabBankF.txt`
+File to be overwritten for download button.
+
 ## More
 
 💡 __Want to use the server script as an API without using the front-end UI? No problem! Just send a query parameter `?raw=json` with your requests to return JSON, like this (replace the first part of the URL to match your remix): `glitch-hello-sqlite.glitch.me?raw=json`__

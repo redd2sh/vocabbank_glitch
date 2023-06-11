@@ -267,11 +267,12 @@ fastify.post("/vocab_Logout", async (request, reply) => {
  username = "";
    try {
   // Get the data from the db
-    
-  const blank = "Overwritten as logged out.";
+ const blank = "Overwritten as logged out.";
+  const jsonBlank = await JSON.stringify(blank);
+ 
   const fs = require('fs');
     
-  fs.writeFile("./public/vocabBankF.txt", blank, (err) => {
+  fs.writeFile("./public/vocabBankF.txt", jsonBlank, (err) => {
   if (err) {
     console.log(err);
 
