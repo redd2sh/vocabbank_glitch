@@ -16,9 +16,10 @@
 }
 
 .gifDiv {
-	height: 150px;
-	background-image: url("https://cdn.glitch.global/c8578ba1-e8d0-46e6-98a9-418d4a5631d4/cloud2.gif?v=1686217849711");
-
+	 height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 } 
 
 .secContent {
@@ -233,5 +234,28 @@ input[type=submit] {
   margin: auto;
 }
 
+table {
+text-align: left; 
+text-justify: inter-word;
+}
 
+
+.rowTerm
+{
+  text-align: left;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.pickDiv {
+  border-radius: 8px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+}
 

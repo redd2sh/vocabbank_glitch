@@ -79,7 +79,7 @@ fastify.post("/vocab_Signup", async (request, reply) => {
   
 return vbPassword1 === vbPassword2 ?
  reply.view("/src/pages/vocabBankMain.hbs")
-  : reply.send("Username or password error!");
+  : reply.send("Username or password error!")
   // insert alert here
 
   // map for login
@@ -104,7 +104,40 @@ fastify.get("/vocabBankLogin", async (request, reply) => {
 
 
 
-// form action Login
+
+
+
+fastify.get("/vocab_Signup", async (request, reply) => {
+  /* 
+  Params is the data we pass to the client
+  - SEO values for front-end UI but not for raw data
+  */
+  let params = request.query.raw ? {} : { seo: seo };
+  
+ 
+  // Send the page options or raw JSON data if the client requested it
+  return request.query.raw
+    ? reply.send(params)
+    : reply.view("/src/pages/vocabBankSignup.hbs", params);
+});
+
+
+fastify.get("/vocab_Login", async (request, reply) => {
+  /* 
+  Params is the data we pass to the client
+  - SEO values for front-end UI but not for raw data
+  */
+  let params = request.query.raw ? {} : { seo: seo };
+  
+ 
+  // Send the page options or raw JSON data if the client requested it
+  return request.query.raw
+    ? reply.send(params)
+    : reply.view("/src/pages/vocabBankLogin.hbs", params);
+});
+
+
+
 
 fastify.post("/vocab_Login", async (request, reply) => {
 
@@ -117,9 +150,7 @@ fastify.post("/vocab_Login", async (request, reply) => {
 
 
   
-return await vbAcc == 1 ?
-  reply.view()
-  : reply.view("/src/pages/vocabBankMain.hbs")
+return reply.view("/src/pages/vocabBankMain.hbs")
 
 });
 
@@ -138,9 +169,7 @@ fastify.post("/vocab_AddTerm", async (request, reply) => {
   
   
   
-return await vbData == 1 ? 
-  reply.view("Invalid Inputs or Duplicate Entry!")
-  : reply.view("/src/pages/vocabBankMain.hbs")
+return reply.view("/src/pages/vocabBankMain.hbs")
 });
 
 
@@ -153,8 +182,9 @@ fastify.get("/vocab_ListTerm", async (request, reply) => {
 
   // Let the user know if there's an error
   params.error = params.userTable ? null : data.errorMessage;
-
-  // Send the log list
+  
+  console.log("listTerm server");
+  // Send the list
   return request.query.raw
     ? reply.send(params)
     : reply.view("/src/pages/vocabBankMain.hbs", params);
@@ -165,20 +195,33 @@ fastify.get("/vocab_ListTerm", async (request, reply) => {
 fastify.get("/vocab_PickTerm", async (request, reply) => {
   
   const params = await request.query.raw ? {} : { seo: seo };
+  
 
   // Get the data from the db
-  params.userTable = await db.listTerm(username);
-
-  // Let the user know if there's an error
-  params.error = params.userTable ? null : data.errorMessage;
-
+  const countTerms = await db.countTerm(username);
+  
+  const rownum1 = await Math.floor(Math.random() * countTerms);
+  params.pickTerm1 = await db.pickTerm(username, rownum1);
+  params.error = params.pickTerm1 ? null : data.errorMessage;
+  
+  const rownum2 = await Math.floor(Math.random() * countTerms);
+  params.pickTerm2 = await db.pickTerm(username, rownum1);
+  params.error = params.pickTerm2 ? null : data.errorMessage;
+  
+  const rownum3 = await Math.floor(Math.random() * countTerms);
+  params.pickTerm3 = await db.pickTerm(username, rownum3);
+  params.error = params.pickTerm3 ? null : data.errorMessage;
+  
+  const rownum4 = await Math.floor(Math.random() * countTerms);
+  params.pickTerm4 = await db.pickTerm(username, rownum4);
+  params.error = params.pickTerm4 ? null : data.errorMessage;
+  
+  console.log("Server term picked");
   // Send the log list
   return request.query.raw
-    ? reply.send(params)
-    : reply.view("/src/pages/vocabBankMain.hbs", params);
+    ? reply.send(await params)
+    : reply.view("/src/pages/vocabBankMain.hbs", await params);
 });
-
-
 
 
 
@@ -186,27 +229,46 @@ fastify.get("/vocab_PickTerm", async (request, reply) => {
 
 fastify.get("/vocabBank_File", async (request, reply) => {
   
-  const params = await request.query.raw ? {} : { seo: seo };
-
+  const params = request.query.raw ? {} : { seo: seo };
+  try {
   // Get the data from the db
-  
-   const obj = await db.listTerm(username);
-    var util = require('util');
-    fs.writeFileSync("/vocabBankF.json", util.inspect(obj) , 'utf-8');
+    
 
+  const obj = await db.listTerm(username);
+  const jsonCont = await JSON.stringify(obj);
+  const fs = require('fs');
+    
+  fs.writeFile("./public/vocabBankF.txt", jsonCont, (err) => {
+  if (err) {
+    console.log(err);
+    params.msg = err;
+  }
+  else {
+    console.log("File written successfully\n");
+  }
+});
 
-
-  // Send the log list
-  return request.query.raw
-    ? reply.send(params)
-    : reply.view("/src/pages/vocabBankMain.hbs", params);
+  console.log("Post method for file");
+  } catch (error) {
+    console.error(error)
+    params.msg = error
+    
+  }
+  params.msg = "File ready to download."
+  return reply.view("/src/pages/vocabBankMain.hbs", params);
 });
 
 
 
 
 
+fastify.post("/vocab_Logout", async (request, reply) => {
 
+ username = "";
+  
+return reply.view("/src/pages/vocabBankSignup.hbs")
+
+});
 
 
 

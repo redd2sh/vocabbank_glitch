@@ -1,14 +1,7 @@
-# Hello SQLite!
+# VOCAB BANK
 
 This project includes a [Node.js](https://nodejs.org/en/about/) server script that uses a persistent [SQLite](https://www.sqlite.org) database. The app also includes a front-end with two web pages that connect to the database using the server API. 📊
 
-The home page presents the user with a poll where they can choose an option, then the page presents the results in a chart. The admin page displays the log of past choices and allows the user to clear it by supplying an admin key (you can set this up by following the steps in `TODO.md`). 🔒
-
-_Last updated: 03 May 2023_
-
-## Prerequisites
-
-To get best use out of this project you'll ideally be familiar with JavaScript and have a little Node.js experience–check out [Hello Node](https://glitch.com/~glitch-hello-node) if you haven't already!
 
 ## What's in this project?
 
@@ -28,23 +21,34 @@ To get best use out of this project you'll ideally be familiar with JavaScript a
 
 When the app runs, the scripts build the database:
 
-← `.data/choices.db`: Your database is created and placed in the `.data` folder, a hidden directory whose contents aren’t copied when a project is remixed. You can see the contents of `.data` in the console by selecting __Tools__ >  __Logs__.
+← `.data/vocabbank.db`: Database is created and placed in the `.data` folder, a hidden directory whose contents aren’t copied when a project is remixed. You can see the contents of `.data` in the console by selecting __Tools__ >  __Logs__.
 
 ### User interface
 
-← `public/style.css`: The style rules that define the site appearance.
+← `public/vocabBankMainStyle.css`
+← `public/vocabBankSignupStyle.css`
+← `public/vocabBankLoginStyle.css`
+Style rules that define the site appearance.
 
-← `src/pages`: The handlebars files that make up the site user interface. The API in `server.js` sends data to these templates to include in the HTML.
+← `src/pages`
+The handlebars files that make up the site user interface. The API in `server.js` sends data to these templates to include in the HTML.
 
-← `src/pages/index.hbs`: The site homepage presents a form when the user first visits. When the visitor submits a preference through the form, the app calls the `POST` endpoint `/`, passing the user selection. The `server.js` endpoint updates the database and returns the user choices submitted so far, which the page presents in a chart (using [Chart.js](https://www.chartjs.org/docs/)–you can see the code in the page `head`).
+← `src/pages/vocabBankSignup.hbs`
+The site homepage presents a form when the user first visits. When the visitor submits a preference through the form, the app calls the `POST` endpoint `/`, passing the user selection. The `server.js` endpoint updates the database and returns the user inputs submitted so far.
 
-← `src/pages/admin.hbs`: The admin page presents a table displaying the log of most recent picks. You can clear the list by setting up your admin key (see `TODO.md`). If the user attempts to clear the list without a valid key, the page will present the log again.
+← `src/pages/vocabBankLogin.hbs`
+The login page presents a form when the user chose to login and when form is submitted, it will take you to the main page.
 
-← `src/seo.json`: When you're ready to share your new site or add a custom domain, change SEO/meta settings in here.
+← `src/pages/vocabBankMain.hbs`
+The main page that presents a form in Vocab Add Tab and prompts the user to submit inputs then saves the data to the database. This will also display the inputs made and saved in database as a table in Vocab List Tab. Website uses a randomizer to display set of inputs in the Vocab Pick Tab. 
 
-## Try this next 🏗️
+← `src/seo.json`
+Search Engine Optimization, the process used to optimize a website's technical configuration, content relevance and link popularity so its pages can become easily findable, more relevant and popular towards user search queries, and as a consequence, search engines rank them better.
 
-Take a look in `TODO.md` for steps in setting up your admin key and adding to the site functionality.
+← `public/vocab_SectionTab.js`
+Script for the main page to setup the section tabs which elements to display or hide by the section tab clicks.
+
+## More
 
 💡 __Want to use the server script as an API without using the front-end UI? No problem! Just send a query parameter `?raw=json` with your requests to return JSON, like this (replace the first part of the URL to match your remix): `glitch-hello-sqlite.glitch.me?raw=json`__
 
@@ -52,7 +56,7 @@ ___Check out [Blank SQLite](https://glitch.com/~glitch-blank-sqlite) for a minim
 
 ![Glitch](https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2FLogo_Color.svg?v=1602781328576)
 
-## You built this with Glitch!
+## Built with Glitch!
 
 [Glitch](https://glitch.com) is a friendly community where millions of people come together to build web apps and websites.
 

@@ -89,10 +89,6 @@
             {{/each}}
         </tbody>
       </table>
-      {{else}}
-      <p class="error">
-        No records!
-      </p>
       </div>
       {{/if}}
     </div>
@@ -104,41 +100,55 @@
 	
 	<div id="PickSec" class="secContent">
 		<h3>Vocab Pick</h3>
-        {{#if userTable.length}}
-      <div style="overflow-x:auto; overflow-y:auto; background-color: white;">
-      <table border="1">
-    <thead style="color: black; text-align: center;">
-          <tr>
-             <th>Vocab_Term</th>
-             <th>Definition</th>
-             <th>Context</th>
-             <th>Notes</th>
-             <th>Date</th>
-          </tr>
-      </thead>
-      <tbody style="color: black; padding: 5px">
-            {{#each userTable}}
-                <tr>
-                  <td>{{vocab_term}}</td>
-                  <td>{{definition}}</td>
-                  <td>{{context}}</td>
-                  <td>{{notes}}</td>
-                  <td>{{date}}</td>
-                </tr>
+    <div class="secContainer" style="overflow-x:auto; overflow-y:auto; color: black;">
+      <div class="listDiv">
+      <a href= "/vocab_PickTerm" class="listbtn">Load Picks</a>
+        </div>
+      {{#if pickTerm1.length}}
+          {{#each pickTerm1}}
+                <div id="pickTerm" class="pickDiv" style="height: 80px;">
+                  <h4>{{vocab_term}}</h4>
+                  
+                  </div> 
+                  <div id="pickDef" class="pickDiv" style="height: 125px;">
+                  <p>{{definition}}</p>
+                  </div>
+                  <div id="pickCntxt" class="pickDiv" style="height: 125px;">
+                  <p>{{context}}</p>
+                </div>
             {{/each}}
-        </tbody>
-      </table>
-      {{else}}
-      <p class="error">
-        No records!
-      </p>
-      </div>
+      
+      
+         {{#if pickTerm2.length}}
+          {{#each pickTerm2}}
+                <div id="moreTerm">
+                  <h4>More Terms: </h4>
+					        <div id="termSetA" class="rowTerm" style="height: 40px;">
+                  <p>{{vocab_term}} - {{definition}}</p>
+                  </div>
+                
+            {{/each}}
+          {{/if}}
+      
+         {{#if pickTerm3.length}}
+          {{#each pickTerm3}}
+					        <div id="termSetB" class="rowTerm" style="height: 40px;">
+                  <p>{{vocab_term}} - {{definition}}</p>
+                  </div>
+            {{/each}}
+          {{/if}}
+      
+          {{#if pickTerm4.length}}
+          {{#each pickTerm4}}
+					        <div id="termSetC" class="rowTerm" style="height: 40px;">
+                  <p>{{vocab_term}} - {{definition}}</p>
+                  </div>
+            {{/each}}
+          {{/if}}
+                  </div>
       {{/if}}
-    
-				</div>
-		</div>
 	</div>
-	
+  </div>
 	
 	
 	
@@ -146,19 +156,32 @@
 		<h3>Vocab File</h3>
   
 		<div class="secContainer">
-      <p>Download your Vocab Bank as a .json file</p>
-      <div class="clearfix">
-        <a href="/vocabBank_File" class="dLbtn" download="/vocabBankF.json">Download</a>
+       <div class="clearfix">
+         <div style="margin: 5px">
+      <p>Download your Vocab Bank as a .txt file.</p>
+        <a href="/vocabBank_File" class="dLbtn">Load to ready the file</a>
+    </div>   
+      {{#if msg.length}}
+         <div style="margin: 5px">
+         <p>
+           {{msg}}
+         </p>
+         </div>
+         {{/if}}
+         <div style="margin: 5px">
+        <a href="/vocabBankF.txt" class="dLbtn" download="vocabBankF.txt">Download!</a>
+           </div>
       </div>
-
 		<form method="post" action="/vocab_Logout">
       <div class="clearfix">
         <button type="submit" class="logoutbtn">Logout</button>
       </div>
 		</form>
+      <div class="gifDiv">
+        <img src="https://cdn.glitch.global/c8578ba1-e8d0-46e6-98a9-418d4a5631d4/catread.gif?v=1686476159315" alt="catread">
+        </div>
 		</div>
-	</div>
-	
-
+  </div>
 </body>
+   
 </html>

@@ -17,8 +17,12 @@
 	/* â Pixel size */
 }
 .gifDiv {
-	height: 150px;
+ height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 	background-image: url("https://cdn.glitch.global/c8578ba1-e8d0-46e6-98a9-418d4a5631d4/cloud2.gif?v=1686217849711");
+
 
 } 
 
@@ -221,6 +225,4 @@ input[type=submit], input[type=reset] {
 	
 	
 }
-
-
 

@@ -141,15 +141,7 @@ addTerm: async (vTerm, defi, contx, notes, date, usern) => {
 
   
       console.log("Term added")   
-/*      
-       console.log(vTerm)
-       console.log(defi)
-       console.log(contx)
-       console.log(notes)
-       console.log(date)
-       console.log(usern)
 
- */ 
       if (count == 0) {
         // Build the user data from the front-end and the current time into the sql query
         await db.run("INSERT INTO Vocab_tbl (vocab_term, definition, context, notes, date, username) VALUES (?, ?, ?, ?, ?, ?)", ([vTerm, defi, contx, notes, date, usern]));
@@ -187,7 +179,6 @@ loginAcc: async (username, password) => {
 
       if (!(count == 1)) {
         throw "Duplicate or account not exist. Retry login or use other username."
-        return 1;
       }
       console.log("Logged in")
     } catch (dbError) {
@@ -198,18 +189,8 @@ loginAcc: async (username, password) => {
   
   
   listTerm: async username => {
-    // Insert new Log table entry indicating the user choice and timestamp
     try {
-      // Check the vote is valid
-        const countRes = await db.get(
-        "SELECT COUNT(*) from Vocab_tbl WHERE username = ?",
-        ([username])
-      );
-      const {'COUNT(*)': count} = countRes;
-      console.log(count);
-       console.log(countRes);
-      
-      
+       console.log("listTerm");
       
       return await db.all(
         "SELECT * from Vocab_tbl WHERE username = ?",
