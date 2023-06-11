@@ -257,11 +257,14 @@ tbody {
   
 }
 
+.h4h {
+  text-align: center;
+  height: 15px;
+}
 
 .rowTerm
 {
   text-align: left;
-  text-justify: inter-word;
   word-wrap: break-word;
   border-radius: 5px;
   background-color: white;
@@ -277,7 +280,6 @@ tbody {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-justify: inter-word;
   word-wrap: break-word;
   margin: 5px;
   padding: 5px 5px 5px;
